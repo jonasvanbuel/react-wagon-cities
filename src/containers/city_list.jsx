@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 // Actions
 import { setCities } from '../actions/actions';
+import { setActiveCity } from '../actions/actions';
 
 // Components
 import City from './city';
@@ -32,7 +33,8 @@ class CityList extends Component {
 // Make actions available to be called by components
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
-    { setCities: setCities },
+    { setCities: setCities, },
+    {setActiveCity: dispatch(setActiveCity())
     dispatch
   );
 }
@@ -40,7 +42,9 @@ function mapDispatchToProps(dispatch) {
 // Make Redux state available to other components
 function mapStateToProps(state) {
   return {
-    cities: state.cities
+    cities: state.cities,
+    activeCity: state.activeCity,
+
   };
 }
 

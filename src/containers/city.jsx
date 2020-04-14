@@ -1,28 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+
 import { setActiveCity } from '../actions/actions';
 
-class City extends Component {
-  changeCity = () => {
-    console.log("Clicked...");
-  }
-
-  render() {
-    const { city } = this.props;
-    return (
-      <li className="list-group-item" onClick={this.props.setActiveCity}>{city.name}</li>
-    );
-  }
-}
-
-// To make actions available to be called by components, or by 'componentWillMount()'
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(
-    { setActiveCity: dispatch(setActiveCity()) },
-    dispatch
+const City = ({ city, setActiveCity }) => {
+  return (
+    <li className="list-group-item" onClick={() => setActiveCity(city)}>{city.name}</li>
   );
-}
+};
+
+// Make actions available
+const mapDispatchToProps = {
+  setActiveCity
+};
 
 export default connect(null, mapDispatchToProps)(City);

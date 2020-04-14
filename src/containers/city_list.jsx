@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 
 // Actions
 import { setCities } from '../actions/actions';
-import { setActiveCity } from '../actions/actions';
 
 // Components
 import City from './city';
@@ -18,10 +17,10 @@ class CityList extends Component {
   }
 
   render() {
-    // debugger
+    const { cities } = this.props;
     return (
       <ul className="list-group cities">
-        {this.props.cities.map((city) => {
+        {cities.map((city) => {
           return <City city={city} key={city.name} />;
         })}
       </ul>
@@ -30,22 +29,16 @@ class CityList extends Component {
 }
 
 // Outside class description
-// Make actions available to be called by components
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(
-    { setCities: setCities, },
-    {setActiveCity: dispatch(setActiveCity())
-    dispatch
-  );
-}
-
-// Make Redux state available to other components
+// Make Redux state available
 function mapStateToProps(state) {
   return {
-    cities: state.cities,
-    activeCity: state.activeCity,
-
+    cities: state.cities
   };
 }
+
+// Make actions available
+const mapDispatchToProps = {
+  setCities
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(CityList);
